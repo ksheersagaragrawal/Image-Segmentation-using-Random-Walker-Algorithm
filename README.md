@@ -6,12 +6,32 @@ This repository contains the implementation of the Random Walker Algorithm for i
 
 The Random Walker Algorithm is a powerful method for image segmentation that treats pixel nodes in an image as a part of a graph. Segmentation is achieved by marking nodes and calculating the probability of a neighbor taking the same pixel value, inversely proportional to the difference between the pixel values.
 
-## Algorithm Steps
+## Random Walk Algorithm Formulas
 
-1. Mark nodes based on pixel values (greater than 110 as 255, less than 75 as 0).
-2. Mark all unmarked nodes in subsequent steps.
-3. Implement matrix operations to calculate probabilities.
-4. Construct a new image based on calculated probabilities.
+The Random Walk Algorithm for image segmentation is based on the following steps and formulas:
+
+1. **Node Marking**:
+   - Mark nodes based on pixel values.
+   - If greater than 110, then mark as 255.
+   - If less than 75, then mark as 0.
+
+2. **Unmarked Nodes**:
+   - All the unmarked nodes will be marked in subsequent steps.
+
+3. **Matrix Operations**:
+   - `Lu . X = (-B)^T . M`
+   - For a matrix of size p*q, we will have L of size p*q*8.
+   - `(B)^T` is a submatrix of the L matrix that contains information about all the unmarked nodes to marked nodes.
+   - `Lu` is a submatrix of the L matrix containing information about all the unmarked to unmarked nodes.
+   - `M` matrix is defined for zero and 255 class `M0` and `M255`.
+
+4. **Calculating Probabilities**:
+   - Find `L inverse`, `(B)^T`, and `M` matrix to find `X`.
+   - `X` for `M0` is the probability for pixel k taking value 0.
+
+5. **Image Construction**:
+   - Construct a new image from `X` by comparing their probability to determine the final pixel values.
+
 
 ## Results and Performance
 
